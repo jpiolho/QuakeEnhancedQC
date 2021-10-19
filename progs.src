@@ -2,6 +2,7 @@
 
 defs.qc
 subs.qc
+maps.qc
 fight.qc
 ai.qc
 combat.qc

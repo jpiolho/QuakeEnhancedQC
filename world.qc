@@ -180,6 +180,10 @@ void() worldspawn =
 	else
 		cvar_set ("sv_gravity", "800");
 
+
+// custom map title
+	self.message = GetMapName(self.message);
+
 // the area based ambient sounds MUST be the first precache_sounds
 
 // player precaches	
