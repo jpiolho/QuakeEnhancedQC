@@ -666,7 +666,23 @@ void(entity e) setspawnparms		= #78;		// set parm1... to the
 												// values at level start
 												// for coop respawn
 												
+void(entity killer, entity killee) finaleFinished = #79;
+string(entity e, string key) localsound = #80; 
+void draw_point( vector point, float colormap, float lifetime, float depthtest ) = #81;
+void draw_line( vector start, vector end, float colormap, float lifetime, float depthtest ) = #82;
+void draw_arrow( vector start, vector end, float colormap, float size, float lifetime, float depthtest ) = #83;
+void draw_ray( vector start, vector direction, float length, float colormap, float size, float lifetime, float depthtest ) = #84;
+void draw_circle( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #85;
+void draw_bounds( vector min, vector max, float colormap, float lifetime, float depthtest ) = #86;
+void draw_worldtext( string s, vector origin, float size, float lifetime, float depthtest ) = #87;
+void draw_sphere( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #88;
+void draw_cylinder( vector origin, float halfHeight, float radius, float colormap, float lifetime, float depthtest ) = #89;
 
+void (entity client, string s, ...) centerprint2 = #90; 
+void (string s,...) bprint2 = #91; 
+void (entity client, string s, ...) sprint2 = #92;
+
+float(string extname) checkextension = #99; 
 
 //============================================================================
 
