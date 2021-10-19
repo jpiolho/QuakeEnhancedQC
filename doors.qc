@@ -489,7 +489,7 @@ void() func_door =
 	self.movetype = MOVETYPE_PUSH;
 	setorigin (self, self.origin);	
 	setmodel (self, self.model);
-	self.classname = "door";
+	self.classname = "func_door";
 
 	self.blocked = door_blocked;
 	self.use = door_use;
@@ -757,7 +757,7 @@ void () func_door_secret =
 	self.angles = '0 0 0';
 	self.solid = SOLID_BSP;
 	self.movetype = MOVETYPE_PUSH;
-	self.classname = "door";
+	self.classname = "func_door_secret";
 	setmodel (self, self.model);
 	setorigin (self, self.origin);	
 	

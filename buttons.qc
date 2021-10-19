@@ -110,6 +110,8 @@ local float		gtemp, ftemp;
 	
 	SetMovedir ();
 
+	self.classname = "func_button"; // Better bot support
+	
 	self.movetype = MOVETYPE_PUSH;
 	self.solid = SOLID_BSP;
 	setmodel (self, self.model);
