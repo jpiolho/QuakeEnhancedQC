@@ -191,12 +191,9 @@ void() health_touch =
 	}
 	else
 	{
-		if (deathmatch != 2)		// deathmatch 2 is the silly old rules
-		{
-			if (deathmatch)
-				self.nextthink = time + 20;
-			self.think = SUB_regen;
-		}
+		if (deathmatch)
+			self.nextthink = time + 20;
+		self.think = SUB_regen;
 	}
 	
 	activator = other;
@@ -218,7 +215,7 @@ void() item_megahealth_rot =
 // just blindly subtract the flag off
 	other.items = other.items - (other.items & IT_SUPERHEALTH);
 	
-	if (deathmatch == 1)	// deathmatch 2 is silly old rules
+	if (deathmatch)	// deathmatch 2 is silly old rules
 	{
 		self.nextthink = time + 20;
 		self.think = SUB_regen;
@@ -271,7 +268,7 @@ void() armor_touch =
 
 	self.solid = SOLID_NOT;
 	self.model = string_null;
-	if (deathmatch == 1)
+	if (deathmatch)
 		self.nextthink = time + 20;
 	self.think = SUB_regen;
 
@@ -404,7 +401,7 @@ void() weapon_touch =
 	best = W_BestWeapon();
 	self = stemp;
 
-	if (deathmatch == 2 || coop)
+	if (deathmatch == 3 || coop)
 		leave = 1;
 	else
 		leave = 0;
@@ -491,7 +488,7 @@ void() weapon_touch =
 // remove it in single player, or setup for respawning in deathmatch
 	self.model = string_null;
 	self.solid = SOLID_NOT;
-	if (deathmatch == 1)
+	if (deathmatch)
 		self.nextthink = time + 30;
 	self.think = SUB_regen;
 	
@@ -672,7 +669,7 @@ local float		best;
 // remove it in single player, or setup for respawning in deathmatch
 	self.model = string_null;
 	self.solid = SOLID_NOT;
-	if (deathmatch == 1)
+	if (deathmatch)
 		self.nextthink = time + 30;
 	self.think = SUB_regen;
 
