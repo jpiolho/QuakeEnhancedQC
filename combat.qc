@@ -161,7 +161,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	}
 
 // team play damage avoidance
-	if ( (teamplay == 1) && (targ.team > 0)&&(targ.team == attacker.team) )
+	if ( (teamplay == 1) && (targ.team > 0)&&(targ.team == attacker.team) && targ != attacker )
 		return;
 		
 // do the damage
