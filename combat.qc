@@ -77,6 +77,10 @@ void(entity targ, entity attacker) Killed =
 	{
 		killed_monsters = killed_monsters + 1;
 		WriteByte (MSG_ALL, SVC_KILLEDMONSTER);
+
+		if(attacker.classname == "player") {
+			attacker.frags++;
+		}
 	}
 
 	ClientObituary(self, attacker);
