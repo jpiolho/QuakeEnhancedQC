@@ -243,6 +243,7 @@ float	FL_JUMPRELEASED			= 4096;	// for jump debouncing
 float	FL_ISBOT				= 8192; // is the client a bot?
 float 	FL_NO_PLAYERS    		= 16384;
 float 	FL_NO_MONSTERS    		= 32768;
+float 	FL_NO_BOTS	    		= 65536;
 
 // edict.movetype values
 float	MOVETYPE_NONE			= 0;	// never moves
