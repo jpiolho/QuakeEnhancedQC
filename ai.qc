@@ -34,7 +34,7 @@ walkmove(angle, speed) primitive is all or nothing
 //
 // globals
 //
-float	current_yaw;
+//float	current_yaw;
 
 //
 // when a monster becomes angry at a player, that monster will be used
