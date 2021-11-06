@@ -176,7 +176,7 @@ void() misc_fireball =
 	self.nextthink = time + (random() * 5);
 	self.think = fire_fly;
 	if (!self.speed)
-		self.speed == 1000;
+		self.speed = 1000;
 };
 
 void() fire_fly =
