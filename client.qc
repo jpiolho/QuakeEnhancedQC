@@ -29,6 +29,16 @@ void() info_intermission =
 };
 
 
+float() GetMaxHealth =
+{
+	if(!deathmatch && skill == 3) {
+		return 50;
+	}
+	else {
+		return 100;
+	}
+}
+
 
 void() SetChangeParms =
 {
@@ -43,10 +53,13 @@ void() SetChangeParms =
 	(IT_KEY1 | IT_KEY2 | IT_INVISIBILITY | IT_INVULNERABILITY | IT_SUIT | IT_QUAD) );
 	
 // cap super health
-	if (self.health > 100)
-		self.health = 100;
-	if (self.health < 50)
-		self.health = 50;
+	if (self.health > self.max_health)
+		self.health = self.max_health;
+
+	local float halfMaxHealth = self.max_health / 2;
+	if (self.health < halfMaxHealth)
+		self.health = halfMaxHealth;
+		
 	parm1 = self.items;
 	parm2 = self.health;
 	parm3 = self.armorvalue;
@@ -64,7 +77,7 @@ void() SetChangeParms =
 void() SetNewParms =
 {
 	parm1 = IT_SHOTGUN | IT_AXE;
-	parm2 = 100;
+	parm2 = GetMaxHealth();
 	parm3 = 0;
 	parm4 = 25;
 	parm5 = 0;
@@ -483,12 +496,12 @@ void() PutClientInServer =
 	spot = SelectSpawnPoint ();
 
 	self.classname = "player";
-	self.health = 100;
+	self.health = GetMaxHealth();
 	self.takedamage = DAMAGE_AIM;
 	self.solid = SOLID_SLIDEBOX;
 	self.movetype = MOVETYPE_WALK;
 	self.show_hostile = 0;
-	self.max_health = 100;
+	self.max_health = self.health;
 	self.flags = FL_CLIENT;
 	self.air_finished = time + 12;
 	self.dmg = 2;   		// initial water damage
