@@ -562,7 +562,7 @@ float SECRET_NO_SHOOT = 8;		// only opened by trigger
 float SECRET_YES_SHOOT = 16;	// shootable even if targeted
 
 
-void () fd_secret_use =
+void (optional entity attacker,optional float damage) fd_secret_use =
 {
 	local float temp;
 	
