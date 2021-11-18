@@ -441,7 +441,7 @@ float		skill;
 .void()		th_run;
 .void()		th_missile;
 .void()		th_melee;
-.void(entity attacker, float damage)		th_pain;
+.void(optional entity attacker,optional float damage)		th_pain;
 .void()		th_die;
 
 .entity		oldenemy;		// mad at this player before taking damage
@@ -603,7 +603,7 @@ void() traceoff						= #30;
 void(entity e) eprint				= #31;		// prints an entire edict
 float(float yaw, float dist) walkmove	= #32;	// returns TRUE or FALSE
 // #33 was removed
-float(float yaw, float dist) droptofloor= #34;	// TRUE if landed on floor
+float(optional float yaw, optional float dist) droptofloor= #34;	// TRUE if landed on floor
 void(float style, string value) lightstyle = #35;
 float(float v) rint					= #36;		// round to nearest int
 float(float v) floor				= #37;		// largest integer <= v
@@ -658,7 +658,7 @@ void(string s) changelevel = #70;
 
 void(string var, string val) cvar_set = #72;	// sets cvar.value
 
-void(entity client, string s) centerprint = #73;	// sprint, but in middle
+void(entity client, string s, optional string s1,optional string s2,optional string s3,optional string s4,optional string s5,optional string s6,optional string s7) centerprint = #73;	// sprint, but in middle
 
 void(vector pos, string samp, float vol, float atten) ambientsound = #74;
 
