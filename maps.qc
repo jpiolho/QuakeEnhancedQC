@@ -4,6 +4,7 @@
 
 #define FirstDefineMap(_bspname,_maptitle) if(mapname == ##_bspname && title == ##_maptitle) { return ##_maptitle" ("ModName")"; }
 #define DefineMap(_bspname,_maptitle) else FirstDefineMap(_bspname,_maptitle)
+#define OverrideDefineMap(_bspname,_maptitle) else if(mapname == ##_bspname) { return ##_maptitle" ("ModName")"; }
 
 string(string title) GetMapName =
 {
@@ -52,6 +53,11 @@ string(string title) GetMapName =
     DefineMap("e4m8","The Nameless City")
     DefineMap("end","Shub-Niggurath's Pit")
     DefineMap("start","Introduction")
+
+	OverrideDefineMap("test/mals_combatbox","Mal's Combatbox")
+	OverrideDefineMap("test/test_shadow","Shadow's Arena")
+	OverrideDefineMap("test/test_aiming","Box Arena")
+	OverrideDefineMap("test/test_obstacles","Obstacle Course")
 
     #endif
 
