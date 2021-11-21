@@ -46,9 +46,9 @@ float		parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8, parm9, parm10, pa
 
 //
 // global variables set by built in functions
-//	
+//
 vector		v_forward, v_up, v_right;	// set by makevectors()
-	
+
 // set by traceline / tracebox
 float		trace_allsolid;
 float		trace_startsolid;
@@ -520,12 +520,12 @@ float	AS_MISSILE		= 4;
 //
 .float		aflag;
 .float		dmg;			// damage done by door when hit
-	
+
 //
 // misc
 //
 .float		cnt; 			// misc flag
-	
+
 //
 // subs
 //
@@ -557,7 +557,7 @@ float	AS_MISSILE		= 4;
 
 
 //===========================================================================
-	
+
 
 //
 // builtin functions
@@ -584,7 +584,7 @@ void(entity e) remove				= #15;
 // An entity will also be ignored for testing if forent == test,
 // forent->owner == test, or test->owner == forent
 // a forent of world is ignored
-void(vector v1, vector v2, float nomonsters, entity forent) traceline = #16;	
+void(vector v1, vector v2, float nomonsters, entity forent) traceline = #16;
 
 entity() checkclient				= #17;	// returns a client to look for
 entity(entity start, .string fld, string match) find = #18;
@@ -669,9 +669,9 @@ string(string s) precache_file2		= #77;		// registered version only
 void(entity e) setspawnparms		= #78;		// set parm1... to the
 												// values at level start
 												// for coop respawn
-												
+
 void(entity killer, entity killee) finaleFinished = #79;
-string(entity e, string key) localsound = #80; 
+string(entity e, string key) localsound = #80;
 void draw_point( vector point, float colormap, float lifetime, float depthtest ) = #81;
 void draw_line( vector start, vector end, float colormap, float lifetime, float depthtest ) = #82;
 void draw_arrow( vector start, vector end, float colormap, float size, float lifetime, float depthtest ) = #83;
@@ -682,11 +682,11 @@ void draw_worldtext( string s, vector origin, float size, float lifetime, float 
 void draw_sphere( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #88;
 void draw_cylinder( vector origin, float halfHeight, float radius, float colormap, float lifetime, float depthtest ) = #89;
 
-void (entity client, string s, ...) centerprint2 = #90; 
-void (string s,...) bprint2 = #91; 
+void (entity client, string s, ...) centerprint2 = #90;
+void (string s,...) bprint2 = #91;
 void (entity client, string s, ...) sprint2 = #92;
 
-float(string extname) checkextension = #99; 
+float(string extname) checkextension = #99;
 
 //============================================================================
 

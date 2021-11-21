@@ -77,11 +77,11 @@ void() movetarget_f =
 {
 	if (!self.targetname)
 		objerror ("monster_movetarget: no targetname");
-		
+
 	self.solid = SOLID_TRIGGER;
 	self.touch = t_movetarget;
 	setsize (self, '-8 -8 -8', '8 8 8');
-	
+
 };
 
 /*QUAKED path_corner (0.5 0.3 0) (-8 -8 -8) (8 8 8)
@@ -107,7 +107,7 @@ local entity	temp;
 
 	if (other.movetarget != self)
 		return;
-	
+
 	if (other.enemy)
 		return;		// fighting, not following a path
 
@@ -147,10 +147,10 @@ returns the range catagorization of an entity reletive to self
 float(entity targ) range =
 {
 local vector	spot1, spot2;
-local float		r;	
+local float		r;
 	spot1 = self.origin + self.view_ofs;
 	spot2 = targ.origin + targ.view_ofs;
-	
+
 	r = vlen (spot1 - spot2);
 	if (r < 120)
 		return RANGE_MELEE;
@@ -171,11 +171,11 @@ returns 1 if the entity is visible to self, even if not infront ()
 float (entity targ) visible =
 {
 	local vector	spot1, spot2;
-	
+
 	spot1 = self.origin + self.view_ofs;
 	spot2 = targ.origin + targ.view_ofs;
 	traceline (spot1, spot2, TRUE, self);	// see through other monsters
-	
+
 	if (trace_inopen && trace_inwater)
 		return FALSE;			// sight line crossed contents
 
@@ -196,11 +196,11 @@ float(entity targ) infront =
 {
 	local vector	vec;
 	local float		dot;
-	
+
 	makevectors (self.angles);
 	vec = normalize (targ.origin - self.origin);
 	dot = vec * v_forward;
-	
+
 	if ( dot > 0.3)
 	{
 		return TRUE;
@@ -230,10 +230,10 @@ void() ChangeYaw =
 // mod down the current angle
 	current_yaw = anglemod( self.angles_y );
 	ideal = self.ideal_yaw;
-	
+
 	if (current_yaw == ideal)
 		return;
-	
+
 	move = ideal - current_yaw;
 	if (ideal > current_yaw)
 	{
@@ -245,7 +245,7 @@ void() ChangeYaw =
 		if (move < -180)
 			move = move + 360;
 	}
-		
+
 	if (move > 0)
 	{
 		if (move > self.yaw_speed)
@@ -280,7 +280,7 @@ void() SightSound =
 {
 local float	rsnd;
 
-	if (self.classname == "monster_ogre")	
+	if (self.classname == "monster_ogre")
 		sound (self, CHAN_VOICE, "ogre/ogwake.wav", 1, ATTN_NORM);
 	else if (self.classname == "monster_knight")
 		sound (self, CHAN_VOICE, "knight/ksight.wav", 1, ATTN_NORM);
@@ -300,7 +300,7 @@ local float	rsnd;
 		sound (self, CHAN_VOICE, "blob/sight1.wav", 1, ATTN_NORM);
 	else if (self.classname == "monster_enforcer")
 	{
-		rsnd = rint(random() * 3);			
+		rsnd = rint(random() * 3);
 		if (rsnd == 1)
 			sound (self, CHAN_VOICE, "enforcer/sight1.wav", 1, ATTN_NORM);
 		else if (rsnd == 2)
@@ -323,7 +323,7 @@ void() FoundTarget =
 		sight_entity = self;
 		sight_entity_time = time;
 	}
-	
+
 	self.show_hostile = time + 1;		// wake up other monsters
 
 	SightSound ();
@@ -382,7 +382,7 @@ float() FindTarget =
 	r = range (client);
 	if (r == RANGE_FAR)
 		return FALSE;
-		
+
 	if (!visible (client))
 		return FALSE;
 
@@ -396,7 +396,7 @@ float() FindTarget =
 		if ( /* client.show_hostile < time || */ !infront (client))
 			return FALSE;
 	}
-	
+
 //
 // got one
 //
@@ -410,7 +410,7 @@ float() FindTarget =
 			return FALSE;
 		}
 	}
-	
+
 	FoundTarget ();
 
 	return TRUE;
@@ -442,10 +442,10 @@ void(float dist) ai_pain =
 	ai_back (dist);
 /*
 	local float	away;
-	
-	away = anglemod (vectoyaw (self.origin - self.enemy.origin) 
+
+	away = anglemod (vectoyaw (self.origin - self.enemy.origin)
 	+ 180*(random()- 0.5) );
-	
+
 	walkmove (away, dist);
 */
 };
@@ -471,9 +471,9 @@ The monster is walking it's beat
 */
 void(float dist) ai_walk =
 {
-	
+
 	movedist = dist;
-	
+
 	// check for noticing a player
 	if (FindTarget ())
 		return;
@@ -493,13 +493,13 @@ void() ai_stand =
 {
 	if (FindTarget ())
 		return;
-	
+
 	if (time > self.pausetime)
 	{
 		self.th_walk ();
 		return;
 	}
-	
+
 // change angle slightly
 
 };
@@ -515,7 +515,7 @@ void() ai_turn =
 {
 	if (FindTarget ())
 		return;
-	
+
 	ChangeYaw ();
 };
 
@@ -529,13 +529,13 @@ ChooseTurn
 void(vector dest3) ChooseTurn =
 {
 	local vector	dir, newdir;
-	
+
 	dir = self.origin - dest3;
 
 	newdir_x = trace_plane_normal_y;
 	newdir_y = 0 - trace_plane_normal_x;
 	newdir_z = 0;
-	
+
 	if (dir * newdir > 0)
 	{
 		dir_x = 0 - trace_plane_normal_y;
@@ -548,7 +548,7 @@ void(vector dest3) ChooseTurn =
 	}
 
 	dir_z = 0;
-	self.ideal_yaw = vectoyaw(dir);	
+	self.ideal_yaw = vectoyaw(dir);
 };
 
 /*
@@ -560,7 +560,7 @@ FacingIdeal
 float() FacingIdeal =
 {
 	local	float	delta;
-	
+
 	delta = anglemod(self.angles_y - self.ideal_yaw);
 	if (delta > 45 && delta < 315)
 		return FALSE;
@@ -642,19 +642,19 @@ Strafe sideways, but stay at aproximately the same range
 void() ai_run_slide =
 {
 	local float	ofs;
-	
+
 	self.ideal_yaw = enemy_yaw;
 	ChangeYaw ();
 	if (self.lefty)
 		ofs = 90;
 	else
 		ofs = -90;
-	
+
 	if (walkmove (self.ideal_yaw + ofs, movedist))
 		return;
-		
+
 	self.lefty = 1 - self.lefty;
-	
+
 	walkmove (self.ideal_yaw - ofs, movedist);
 };
 
@@ -668,7 +668,7 @@ The monster has an enemy it is trying to kill
 */
 void(float dist) ai_run =
 {
-	
+
 	movedist = dist;
 // see if the enemy is dead
 	if (self.enemy.health <= 0)
@@ -707,7 +707,7 @@ void(float dist) ai_run =
 	enemy_infront = infront(self.enemy);
 	enemy_range = range(self.enemy);
 	enemy_yaw = vectoyaw(self.enemy.origin - self.origin);
-	
+
 	if (self.attack_state == AS_MISSILE)
 	{
 //dprint ("ai_run_missile\n");
@@ -723,13 +723,13 @@ void(float dist) ai_run =
 
 	if (CheckAnyAttack ())
 		return;					// beginning an attack
-		
+
 	if (self.attack_state == AS_SLIDING)
 	{
 		ai_run_slide ();
 		return;
 	}
-		
+
 // head straight in
 	movetogoal (dist);		// done in C code...
 };
