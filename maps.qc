@@ -54,8 +54,8 @@ string(string title) GetMapName =
     DefineMap("start","Introduction")
 
     #endif
-	
+
 	// Default
 	return title;
-	
+
 }
