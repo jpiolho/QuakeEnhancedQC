@@ -1,91 +1,67 @@
+#define ShowModName 0
+#define ModName "Unnamed"
+
+
+#define FirstDefineMap(_bspname,_maptitle) if(mapname == ##_bspname && title == ##_maptitle) { return ##_maptitle" ("ModName")"; }
+#define DefineMap(_bspname,_maptitle) else FirstDefineMap(_bspname,_maptitle)
+#define OverrideDefineMap(_bspname,_maptitle) else if(mapname == ##_bspname) { return ##_maptitle" ("ModName")"; }
+
 string(string title) GetMapName =
 {
-    if(mapname == "base32b" && title == "Base 32") {
-        return "Base 32";
-    } else if(mapname == "death32c" && title == "Death 32") {
-        return "Death 32";
-    } else if(mapname == "dm1" && title == "Place of Two Deaths") {
-        return "Place of Two Deaths";
-    } else if(mapname == "dm2" && title == "Claustrophobopolis") {
-        return "Claustrophobopolis";
-    } else if(mapname == "dm3" && title == "The Abandoned Base") {
-        return "The Abandoned Base";
-    } else if(mapname == "dm4" && title == "The Bad Place") {
-        return "The Bad Place";
-    } else if(mapname == "dm5" && title == "The Cistern") {
-        return "The Cistern";
-    } else if(mapname == "dm6" && title == "The Dark Zone") {
-        return "The Dark Zone";
-    } else if(mapname == "dm7" && title == "The Edge") {
-        return "The Edge";
-    } else if(mapname == "dm8" && title == "Acrophobia") {
-        return "Acrophobia";
-    } else if(mapname == "e1m1" && title == "The Slipgate Complex") {
-        return "The Slipgate Complex";
-    } else if(mapname == "e1m2" && title == "Castle of the Damned") {
-        return "Castle of the Damned";
-    } else if(mapname == "e1m3" && title == "The Necropolis") {
-        return "The Necropolis";
-    } else if(mapname == "e1m4" && title == "The Grisly Grotto") {
-        return "The Grisly Grotto";
-    } else if(mapname == "e1m5" && title == "Gloom Keep") {
-        return "Gloom Keep";
-    } else if(mapname == "e1m6" && title == "The Door To Chthon") {
-        return "The Door To Chthon";
-    } else if(mapname == "e1m7" && title == "The House of Chthon") {
-        return "The House of Chthon";
-    } else if(mapname == "e1m8" && title == "Ziggurat Vertigo") {
-        return "Ziggurat Vertigo";
-    } else if(mapname == "e2m1" && title == "The Installation") {
-        return "The Installation";
-    } else if(mapname == "e2m2" && title == "The Ogre Citadel") {
-        return "The Ogre Citadel";
-    } else if(mapname == "e2m3" && title == "The Crypt of Decay") {
-        return "The Crypt of Decay";
-    } else if(mapname == "e2m4" && title == "The Ebon Fortress") {
-        return "The Ebon Fortress";
-    } else if(mapname == "e2m5" && title == "The Wizard's Manse") {
-        return "The Wizard's Manse";
-    } else if(mapname == "e2m6" && title == "The Dismal Oubliette") {
-        return "The Dismal Oubliette";
-    } else if(mapname == "e2m7" && title == "The Underearth") {
-        return "The Underearth";
-    } else if(mapname == "e3m1" && title == "Termination Central") {
-        return "Termination Central";
-    } else if(mapname == "e3m2" && title == "The Vaults of Zin") {
-        return "The Vaults of Zin";
-    } else if(mapname == "e3m3" && title == "The Tomb of Terror") {
-        return "The Tomb of Terror";
-    } else if(mapname == "e3m4" && title == "Satan's Dark Delight") {
-        return "Satan's Dark Delight";
-    } else if(mapname == "e3m5" && title == "The Wind Tunnels") {
-        return "The Wind Tunnels";
-    } else if(mapname == "e3m6" && title == "Chambers of Torment") {
-        return "Chambers of Torment";
-    } else if(mapname == "e3m7" && title == "The Haunted Halls") {
-        return "The Haunted Halls";
-    } else if(mapname == "e4m1" && title == "The Sewage System") {
-        return "The Sewage System";
-    } else if(mapname == "e4m2" && title == "The Tower of Despair") {
-        return "The Tower of Despair";
-    } else if(mapname == "e4m3" && title == "The Elder God Shrine") {
-        return "The Elder God Shrine";
-    } else if(mapname == "e4m4" && title == "The Palace of Hate") {
-        return "The Palace of Hate";
-    } else if(mapname == "e4m5" && title == "Hell's Atrium") {
-        return "Hell's Atrium";
-    } else if(mapname == "e4m6" && title == "The Pain Maze") {
-        return "The Pain Maze";
-    } else if(mapname == "e4m7" && title == "Azure Agony") {
-        return "Azure Agony";
-    } else if(mapname == "e4m8" && title == "The Nameless City") {
-        return "The Nameless City";
-    } else if(mapname == "end" && title == "Shub-Niggurath's Pit") {
-        return "Shub-Niggurath's Pit";
-    } else if(mapname == "start" && title == "Introduction") {
-        return "Introduction";
-    }
-	
+    #if ShowModName == 1
+
+    // Id1 maps
+	FirstDefineMap("base32b","Base 32")
+    DefineMap("death32c","Death 32")
+    DefineMap("dm1","Place of Two Deaths")
+    DefineMap("dm2","Claustrophobopolis")
+    DefineMap("dm3","The Abandoned Base")
+    DefineMap("dm4","The Bad Place")
+    DefineMap("dm5","The Cistern")
+    DefineMap("dm6","The Dark Zone")
+    DefineMap("dm7","The Edge")
+    DefineMap("dm8","Acrophobia")
+    DefineMap("e1m1","The Slipgate Complex")
+    DefineMap("e1m2","Castle of the Damned")
+    DefineMap("e1m3","The Necropolis")
+    DefineMap("e1m4","The Grisly Grotto")
+    DefineMap("e1m5","Gloom Keep")
+    DefineMap("e1m6","The Door To Chthon")
+    DefineMap("e1m7","The House of Chthon")
+    DefineMap("e1m8","Ziggurat Vertigo")
+    DefineMap("e2m1","The Installation")
+    DefineMap("e2m2","The Ogre Citadel")
+    DefineMap("e2m3","The Crypt of Decay")
+    DefineMap("e2m4","The Ebon Fortress")
+    DefineMap("e2m5","The Wizard's Manse")
+    DefineMap("e2m6","The Dismal Oubliette")
+    DefineMap("e2m7","The Underearth")
+    DefineMap("e3m1","Termination Central")
+    DefineMap("e3m2","The Vaults of Zin")
+    DefineMap("e3m3","The Tomb of Terror")
+    DefineMap("e3m4","Satan's Dark Delight")
+    DefineMap("e3m5","The Wind Tunnels")
+    DefineMap("e3m6","Chambers of Torment")
+    DefineMap("e3m7","The Haunted Halls")
+    DefineMap("e4m1","The Sewage System")
+    DefineMap("e4m2","The Tower of Despair")
+    DefineMap("e4m3","The Elder God Shrine")
+    DefineMap("e4m4","The Palace of Hate")
+    DefineMap("e4m5","Hell's Atrium")
+    DefineMap("e4m6","The Pain Maze")
+    DefineMap("e4m7","Azure Agony")
+    DefineMap("e4m8","The Nameless City")
+    DefineMap("end","Shub-Niggurath's Pit")
+    DefineMap("start","Introduction")
+
+	OverrideDefineMap("test/mals_combatbox","Mal's Combatbox")
+	OverrideDefineMap("test/test_shadow","Shadow's Arena")
+	OverrideDefineMap("test/test_aiming","Box Arena")
+	OverrideDefineMap("test/test_obstacles","Obstacle Course")
+
+    #endif
+
 	// Default
 	return title;
+
 }
