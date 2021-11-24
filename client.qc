@@ -919,6 +919,19 @@ void() PlayerPreThink =
 	if (self.view_ofs == '0 0 0')
 		return;		// intermission or finale
 
+	// print welcome message with flag info from server
+	if(!(self.cnt & PEF_SEEN_MESSAGE))
+	{
+		self.cnt |= PEF_SEEN_MESSAGE;
+
+		centerprint(self,
+			"Welcome to "ModName"\n"
+			"\n"
+			"Any bugs are probably related to the mod\n"
+			"\n"
+			"Have fun!");
+	}
+
 	makevectors (self.v_angle);		// is this still used
 
 	CheckRules ();

@@ -393,6 +393,9 @@ float	MSG_ONE			= 1;		// reliable to one (msg_entity)
 float	MSG_ALL			= 2;		// reliable to all
 float	MSG_INIT		= 3;		// write to the init string
 
+// has client seen welcome message?
+float   PEF_SEEN_MESSAGE = 1;
+
 //================================================
 
 //

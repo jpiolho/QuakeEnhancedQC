@@ -1,5 +1,5 @@
-#define ShowModName 0
-#define ModName "Unnamed"
+#define ShowModName 1
+#define ModName "Unnamed Mod"
 
 
 #define FirstDefineMap(_bspname,_maptitle) if(mapname == ##_bspname && title == ##_maptitle) { return ##_maptitle" ("ModName")"; }
