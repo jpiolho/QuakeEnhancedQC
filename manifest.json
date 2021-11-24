@@ -1,0 +1,13 @@
+{
+	// Data required for Add-ons menu
+	"manifestVersion": 1,
+	"name": "NAME HERE",
+	"version": "VERSION HERE",
+	"author": "AUTHOR HERE",
+	"date": "DATE HERE",
+	"description": "Description here with newlines\nto place text on multiple lines",
+	"gamedir": "id1",
+	"download": "name_version.zip",
+	"screenshots": [],
+	"pak": "pak0.pak"
+}
