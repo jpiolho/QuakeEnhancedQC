@@ -1,2 +1,3 @@
 *.exe
-error.log
+src/error.log
+progs.dat
