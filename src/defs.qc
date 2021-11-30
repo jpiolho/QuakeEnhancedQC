@@ -336,13 +336,40 @@ vector	VEC_HULL2_MIN = '-32 -32 -24';
 vector	VEC_HULL2_MAX = '32 32 64';
 
 // protocol bytes
-float	SVC_TEMPENTITY		= 23;
-float	SVC_KILLEDMONSTER	= 27;
-float	SVC_FOUNDSECRET		= 28;
-float	SVC_INTERMISSION	= 30;
-float	SVC_FINALE			= 31;
-float	SVC_CDTRACK			= 32;
-float	SVC_SELLSCREEN		= 33;
+float	SVC_BAD					= 0;
+float	SVC_NOP					= 1;
+float	SVC_DISCONNECT			= 2;
+float	SVC_UPDATESTAT			= 3;
+float	SVC_VERSION				= 4;
+float	SVC_SETVIEW				= 5;
+float	SVC_SOUND				= 6;
+float	SVC_TIME				= 7;
+float	SVC_PRINT				= 8;
+float	SVC_STUFFTEXT			= 9;
+float	SVC_SETANGLE			= 10;
+float	SVC_SERVERINFO			= 11;
+float	SVC_LIGHTSTYLE			= 12;
+float 	SVC_UPDATENAME			= 13;
+float 	SVC_UPDATEFRAGS			= 14;
+float 	SVC_CLIENTDATA			= 15;
+float	SVC_STOPSOUND			= 16;
+float	SVC_UPDATECOLORS		= 17;
+float	SVC_PARTICLE			= 18;
+float 	SVC_DAMAGE				= 19;
+float	SVC_SPAWNSTATIC			= 20;
+float	SVC_SPAWNBASELINE		= 22;
+float	SVC_TEMPENTITY			= 23;
+float	SVC_SETPAUSE			= 24;
+float	SVC_SIGNONNUM			= 25;
+float	SVC_CENTERPRINT			= 26;
+float	SVC_KILLEDMONSTER		= 27;
+float	SVC_FOUNDSECRET			= 28;
+float	SVC_SPAWNSTATICSOUND	= 29;
+float	SVC_INTERMISSION		= 30;
+float	SVC_FINALE				= 31;
+float	SVC_CDTRACK				= 32;
+float	SVC_SELLSCREEN			= 33;
+float	SVC_CUTSCENE			= 34;
 
 
 float	TE_SPIKE		= 0;
