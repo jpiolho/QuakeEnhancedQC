@@ -1,2 +1,8 @@
+*.nav
+*.pak
 *.exe
-error.log
+
+src/error.log
+src/fteqcc.log
+progs.dat
+progs.lno
