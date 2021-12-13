@@ -550,6 +550,9 @@ void() PutClientInServer =
 	}
 
 	spawn_tdeath (self.origin, self);
+
+	// Prevent attacking when spawning
+	stuffcmd(self,"-attack\n");
 };
 
 
