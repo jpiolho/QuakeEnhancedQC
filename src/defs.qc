@@ -370,7 +370,25 @@ float	SVC_FINALE				= 31;
 float	SVC_CDTRACK				= 32;
 float	SVC_SELLSCREEN			= 33;
 float	SVC_CUTSCENE			= 34;
-
+float   SVC_SKYBOX              = 37;
+float   SVC_BOTCHAT             = 38;
+float   SVC_SPAWNEDMONSTER      = 39;
+float   SVC_BONUSFLASH          = 40;
+float   SVC_FOG                 = 41;
+float   SVC_SPAWNBASELINE2      = 42;
+float   SVC_SPAWNSTATIC2        = 43;
+float   SVC_SPAWNSTATICSOUND2   = 44;
+float   SVC_SETVIEWS            = 45;
+float   SVC_UPDATEPING          = 46;
+float   SVC_UPDATESOCIAL        = 47;
+float   SVC_UPDATEPLINFO        = 48;
+float   SVC_RAWPRINT            = 49;
+float   SVC_SERVERVARS          = 50;
+float   SVC_SEQ                 = 51;
+float   SVC_CHAT                = 53;
+float   SVC_LEVELCOMPLETED      = 54;
+float   SVC_BACKTOLOBBY         = 55;
+float   SVC_LOCALSOUND          = 56;
 
 float	TE_SPIKE		= 0;
 float	TE_SUPERSPIKE	= 1;

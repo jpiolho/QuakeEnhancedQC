@@ -240,25 +240,11 @@ void() armor_touch =
 	if (other.classname != "player")
 		return;
 
-	if (self.classname == "item_armor1")
-	{
-		type = 0.3;
-		value = 100;
-		bit = IT_ARMOR1;
-	}
-	if (self.classname == "item_armor2")
-	{
-		type = 0.6;
-		value = 150;
-		bit = IT_ARMOR2;
-	}
-	if (self.classname == "item_armorInv")
-	{
-		type = 0.8;
-		value = 200;
-		bit = IT_ARMOR3;
-	}
-	if (other.armortype*other.armorvalue >= type*value)
+	type = self.armortype;
+    value = self.armorvalue;
+    bit = self.items;
+    
+    if (other.armortype*other.armorvalue >= type*value)
 		return;
 
 	other.armortype = type;
@@ -286,6 +272,10 @@ void() armor_touch =
 
 void() item_armor1 =
 {
+    self.armortype = 0.3;
+    self.armorvalue = 100;
+    self.items = IT_ARMOR1;
+
 	self.touch = armor_touch;
 	precache_model ("progs/armor.mdl");
 	setmodel (self, "progs/armor.mdl");
@@ -299,6 +289,10 @@ void() item_armor1 =
 
 void() item_armor2 =
 {
+    self.armortype = 0.6;
+    self.armorvalue = 150;
+    self.items = IT_ARMOR2;
+
 	self.touch = armor_touch;
 	precache_model ("progs/armor.mdl");
 	setmodel (self, "progs/armor.mdl");
@@ -312,6 +306,10 @@ void() item_armor2 =
 
 void() item_armorInv =
 {
+    self.armortype = 0.8;
+    self.armorvalue = 200;
+    self.items = IT_ARMOR3;
+
 	self.touch = armor_touch;
 	precache_model ("progs/armor.mdl");
 	setmodel (self, "progs/armor.mdl");
