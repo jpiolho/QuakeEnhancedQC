@@ -118,6 +118,7 @@ void() OgreFireGrenade =
 	missile.nextthink = time + 2.5;
 	missile.think = OgreGrenadeExplode;
 
+	missile.effects = (missile.effects | EF_PROJECTILE);
 	setmodel (missile, "progs/grenade.mdl");
 	setsize (missile, '0 0 0', '0 0 0');
 	setorigin (missile, self.origin);

@@ -1043,9 +1043,9 @@ void() CheckPowerups =
 			self.invincible_finished = 0;
 		}
 		if (self.invincible_finished > time)
-			self.effects = self.effects | EF_DIMLIGHT;
+			self.effects = self.effects | EF_INVINCIBLE;
 		else
-			self.effects = self.effects - (self.effects & EF_DIMLIGHT);
+			self.effects = self.effects - (self.effects & EF_INVINCIBLE);
 	}
 
 // super damage
@@ -1078,9 +1078,9 @@ void() CheckPowerups =
 			self.super_time = 0;
 		}
 		if (self.super_damage_finished > time)
-			self.effects = self.effects | EF_DIMLIGHT;
+			self.effects = self.effects | EF_QUADDAMAGE;
 		else
-			self.effects = self.effects - (self.effects & EF_DIMLIGHT);
+			self.effects = self.effects - (self.effects & EF_QUADDAMAGE);
 	}
 
 // suit
