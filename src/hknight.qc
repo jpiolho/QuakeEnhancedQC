@@ -77,6 +77,7 @@ void(float offset) hknight_shot =
 	setmodel (newmis, "progs/k_spike.mdl");
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);
 	newmis.velocity = vec*300;
+	newmis.effects = (newmis.effects | EF_PROJECTILE);
 	sound (self, CHAN_WEAPON, "hknight/attack1.wav", 1, ATTN_NORM);
 };
 

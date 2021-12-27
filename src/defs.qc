@@ -424,12 +424,14 @@ float	UPDATE_STATIC	= 1;
 float	UPDATE_BINARY	= 2;
 float	UPDATE_TEMP		= 3;
 
-// entity effects
 
-float	EF_BRIGHTFIELD	= 1;
-float	EF_MUZZLEFLASH 	= 2;
-float	EF_BRIGHTLIGHT 	= 4;
-float	EF_DIMLIGHT 	= 8;
+float	EF_BRIGHTFIELD	= 1;  // one time whitish flash
+float	EF_MUZZLEFLASH 	= 2;  // one time flash used for lightning/missile launch , shooting
+float	EF_BRIGHTLIGHT 	= 4;  // persistent harsh bright white light
+float	EF_DIMLIGHT 	= 8;  // golden flicker used for enforcer laser
+float	EF_QUADDAMAGE 	= 16; // blue/purplish flickery glow that follows player with quad damage
+float	EF_INVINCIBLE 	= 32; // flickering red glow that follows player with pertagram of protection/IT_INVULNERABILITY
+float	EF_PROJECTILE 	= 64; // hellknight missile, ogre grenade = harsh flicking yellow light
 
 
 // messages
