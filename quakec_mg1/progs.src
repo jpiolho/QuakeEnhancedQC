@@ -1,0 +1,78 @@
+#output "../progs.dat"
+
+#copyright "Machinegames 2021"
+
+// Enables downed zombies to be gibbed by nearby explosions
+// #define GIB_DOWNED_ZOMBIES
+
+// Enables grenade downward slope bounce fix
+#define GRENADE_BOUNCE_FIX
+
+// Enables monsters being aware of being in dangerous liquids
+#define MONSTERS_AWARE_OF_CONTENTS
+
+// Enables experimental coop respawn behaviour: items respawn <num_players> times so all players have a chance to pick them up
+#define COOP_RESPAWN_ITEMS_FOR_PLAYERS
+
+// Enables experimental coop respawn behaviour: keep all the players weapons when a checkpoint is activated
+#define COOP_RESPAWN_KEEP_WEAPONS
+
+// Makes it so that killing an entity that has a delayed trigger behaviour while the delay is pending also cancels the delayed trigger
+#define ALLOW_DELAYED_THINK_CANCEL
+
+#includelist
+
+defs.qc
+math.qc
+subs.qc
+frametick.qc
+fight.qc
+ai.qc
+combat.qc
+items.qc
+items_runes.qc
+weapons.qc
+fog.qc // Fog controls
+world.qc
+client.qc
+player.qc
+monsters.qc
+doors.qc
+buttons.qc
+triggers.qc
+plats.qc
+misc.qc
+func_bob.qc
+lights.qc
+rotate.qc
+func_toss.qc
+// func_fade.qc // Bad behavior
+
+
+monsters/ogre.qc
+monsters/demon.qc
+monsters/shambler.qc
+monsters/knight.qc
+monsters/soldier.qc
+monsters/wizard.qc
+monsters/dog.qc
+monsters/zombie.qc
+monsters/boss.qc
+
+monsters/tarbaby.qc		// registered
+monsters/hknight.qc		// registered
+monsters/fish.qc		// registered
+monsters/shalrath.qc	// registered
+monsters/enforcer.qc	// registered
+monsters/oldone.qc		// registered
+
+misc_corpses.qc //Corpses yay
+misc_fx.qc // adds screenshake
+
+//Map specific code? Why not..
+map_specific/mge2m2.qc
+map_specific/hub.qc
+
+horde.qc // Yoder readded Sept 24, 2021
+
+#endlist
