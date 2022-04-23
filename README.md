@@ -6,7 +6,7 @@ Since then the [official QC has been released](https://github.com/id-Software/qu
 Both repositories have now been merged and this repo will continue with improvements and utilities on top of the official release.
 
 * Meant to be used with [FTEQCC](https://www.fteqcc.org) compiler
-* All warnings have been fixed
+* Compiler warnings have been fixed (`id1` and `mg1` so far)
 * Some utilities related to Quake Enhanced have been added
 * This code is released under the GPLv2 license. See `COPYING.txt` for more details.
 
