@@ -1,3 +1,21 @@
+/*  Copyright (C) 1996-2022 id Software LLC
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+    See file, 'COPYING', for details.
+*/
 
 /*
 ==============================================================================
@@ -46,9 +64,9 @@ float		parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8, parm9, parm10, pa
 
 //
 // global variables set by built in functions
-//
+//	
 vector		v_forward, v_up, v_right;	// set by makevectors()
-
+	
 // set by traceline / tracebox
 float		trace_allsolid;
 float		trace_startsolid;
@@ -60,7 +78,7 @@ entity		trace_ent;
 float		trace_inopen;
 float		trace_inwater;
 
-entity		msg_entity;				// destination of single entity writes
+entity		msg_entity;			// destination of single entity writes
 
 //
 // required prog functions
@@ -83,7 +101,6 @@ void()		SetNewParms;			// called when a client first connects to
 
 void()		SetChangeParms;			// call to set parms for self so they can
 									// be saved for a level transition
-
 
 //================================================
 void		end_sys_globals;		// flag for structure dumping
@@ -177,7 +194,7 @@ void		end_sys_globals;		// flag for structure dumping
 .float		armortype;		// save this fraction of incoming damage
 .float		armorvalue;
 
-.float		waterlevel;		// 0 = not in, 1 = feet, 2 = wast, 3 = eyes
+.float		waterlevel;		// 0 = not in, 1 = feet, 2 = waist, 3 = eyes
 .float		watertype;		// a contents value
 
 .float		ideal_yaw;
@@ -230,20 +247,21 @@ float 	TRUE					= 1;
 // edict.flags
 float	FL_FLY					= 1;
 float	FL_SWIM					= 2;
-float	FL_CLIENT				= 8;	// set for all client edicts
-float	FL_INWATER				= 16;	// for enter / leave water splash
+float	FL_CLIENT				= 8;		// set for all client edicts
+float	FL_INWATER				= 16;		// for enter / leave water splash
 float	FL_MONSTER				= 32;
-float	FL_GODMODE				= 64;	// player cheat
-float	FL_NOTARGET				= 128;	// player cheat
-float	FL_ITEM					= 256;	// extra wide size for bonus items
-float	FL_ONGROUND				= 512;	// standing on something
-float	FL_PARTIALGROUND		= 1024;	// not all corners are valid
-float	FL_WATERJUMP			= 2048;	// player jumping out of water
-float	FL_JUMPRELEASED			= 4096;	// for jump debouncing
-float	FL_ISBOT				= 8192; // is the client a bot?
-float 	FL_NO_PLAYERS    		= 16384;
-float 	FL_NO_MONSTERS    		= 32768;
-float 	FL_NO_BOTS	    		= 65536;
+float	FL_GODMODE				= 64;		// player cheat
+float	FL_NOTARGET				= 128;		// player cheat
+float	FL_ITEM					= 256;		// extra wide size for bonus items
+float	FL_ONGROUND				= 512;		// standing on something
+float	FL_PARTIALGROUND		= 1024;		// not all corners are valid
+float	FL_WATERJUMP			= 2048;		// player jumping out of water
+float	FL_JUMPRELEASED			= 4096;		// for jump debouncing
+float 	FL_ISBOT     			= 8192; 	// mal: this will be set on bot players
+float 	FL_NO_PLAYERS			= 16384;	// mal: used by the spawn point editor
+float 	FL_NO_MONSTERS			= 32768;	// mal: used by the spawn point editor
+float   FL_NO_BOTS				= 65536;	// mal: any item marked with this will be ignored by bots.
+float 	FL_OBJECTIVE			= 131072; 	// mal: any item marked with this is an objective of some kind.
 
 // edict.movetype values
 float	MOVETYPE_NONE			= 0;	// never moves
@@ -257,7 +275,7 @@ float	MOVETYPE_PUSH			= 7;	// no clip to world, push and crush
 float	MOVETYPE_NOCLIP			= 8;
 float	MOVETYPE_FLYMISSILE		= 9;	// fly with extra size against monsters
 float	MOVETYPE_BOUNCE			= 10;
-float	MOVETYPE_BOUNCEMISSILE	= 11;	// bounce with extra size
+float	MOVETYPE_GIB			= 11;	// like MOVETYPE_BOUNCE, but with adjustable gravity
 
 // edict.solid values
 float	SOLID_NOT				= 0;	// no interaction with other objects
@@ -265,6 +283,7 @@ float	SOLID_TRIGGER			= 1;	// touch on edge, but not blocking
 float	SOLID_BBOX				= 2;	// touch on edge, block
 float	SOLID_SLIDEBOX			= 3;	// touch on edge, but not an onground
 float	SOLID_BSP				= 4;	// bsp clip, touch on edge, block
+float	SOLID_CORPSE			= 5;	// reports touch and can shoot it, but not blocking otherwise.
 
 // range values
 float	RANGE_MELEE				= 0;
@@ -336,59 +355,16 @@ vector	VEC_HULL2_MIN = '-32 -32 -24';
 vector	VEC_HULL2_MAX = '32 32 64';
 
 // protocol bytes
-float	SVC_BAD					= 0;
-float	SVC_NOP					= 1;
-float	SVC_DISCONNECT			= 2;
-float	SVC_UPDATESTAT			= 3;
-float	SVC_VERSION				= 4;
-float	SVC_SETVIEW				= 5;
-float	SVC_SOUND				= 6;
-float	SVC_TIME				= 7;
-float	SVC_PRINT				= 8;
-float	SVC_STUFFTEXT			= 9;
-float	SVC_SETANGLE			= 10;
-float	SVC_SERVERINFO			= 11;
-float	SVC_LIGHTSTYLE			= 12;
-float 	SVC_UPDATENAME			= 13;
-float 	SVC_UPDATEFRAGS			= 14;
-float 	SVC_CLIENTDATA			= 15;
-float	SVC_STOPSOUND			= 16;
-float	SVC_UPDATECOLORS		= 17;
-float	SVC_PARTICLE			= 18;
-float 	SVC_DAMAGE				= 19;
-float	SVC_SPAWNSTATIC			= 20;
-float	SVC_SPAWNBASELINE		= 22;
-float	SVC_TEMPENTITY			= 23;
-float	SVC_SETPAUSE			= 24;
-float	SVC_SIGNONNUM			= 25;
-float	SVC_CENTERPRINT			= 26;
-float	SVC_KILLEDMONSTER		= 27;
-float	SVC_FOUNDSECRET			= 28;
-float	SVC_SPAWNSTATICSOUND	= 29;
-float	SVC_INTERMISSION		= 30;
-float	SVC_FINALE				= 31;
-float	SVC_CDTRACK				= 32;
-float	SVC_SELLSCREEN			= 33;
-float	SVC_CUTSCENE			= 34;
-float   SVC_SKYBOX              = 37;
-float   SVC_BOTCHAT             = 38;
-float   SVC_SPAWNEDMONSTER      = 39;
-float   SVC_BONUSFLASH          = 40;
-float   SVC_FOG                 = 41;
-float   SVC_SPAWNBASELINE2      = 42;
-float   SVC_SPAWNSTATIC2        = 43;
-float   SVC_SPAWNSTATICSOUND2   = 44;
-float   SVC_SETVIEWS            = 45;
-float   SVC_UPDATEPING          = 46;
-float   SVC_UPDATESOCIAL        = 47;
-float   SVC_UPDATEPLINFO        = 48;
-float   SVC_RAWPRINT            = 49;
-float   SVC_SERVERVARS          = 50;
-float   SVC_SEQ                 = 51;
-float   SVC_CHAT                = 53;
-float   SVC_LEVELCOMPLETED      = 54;
-float   SVC_BACKTOLOBBY         = 55;
-float   SVC_LOCALSOUND          = 56;
+float	SVC_TEMPENTITY		= 23;
+float	SVC_KILLEDMONSTER	= 27;
+float	SVC_FOUNDSECRET		= 28;
+float	SVC_INTERMISSION	= 30;
+float	SVC_FINALE			= 31;
+float	SVC_CDTRACK			= 32;
+float	SVC_SELLSCREEN		= 33;
+float 	SVC_SPAWNEDMONSTER	= 39;
+float	SVC_ACHIEVEMENT		= 52;
+
 
 float	TE_SPIKE		= 0;
 float	TE_SUPERSPIKE	= 1;
@@ -424,21 +400,54 @@ float	UPDATE_STATIC	= 1;
 float	UPDATE_BINARY	= 2;
 float	UPDATE_TEMP		= 3;
 
+// entity effects
 
-float	EF_BRIGHTFIELD	= 1;  // one time whitish flash
-float	EF_MUZZLEFLASH 	= 2;  // one time flash used for lightning/missile launch , shooting
-float	EF_BRIGHTLIGHT 	= 4;  // persistent harsh bright white light
-float	EF_DIMLIGHT 	= 8;  // golden flicker used for enforcer laser
-float	EF_QUADDAMAGE 	= 16; // blue/purplish flickery glow that follows player with quad damage
-float	EF_INVINCIBLE 	= 32; // flickering red glow that follows player with pertagram of protection/IT_INVULNERABILITY
-float	EF_PROJECTILE 	= 64; // hellknight missile, ogre grenade = harsh flicking yellow light
-
+float	EF_BRIGHTFIELD	= 1;
+float	EF_MUZZLEFLASH 	= 2;
+float	EF_BRIGHTLIGHT 	= 4;
+float	EF_DIMLIGHT 	= 8;
+float 	EF_QUADLIGHT    = 16;
+float 	EF_PENTALIGHT   = 32;
+float	EF_CANDLELIGHT	= 64;
 
 // messages
 float	MSG_BROADCAST	= 0;		// unreliable to all
 float	MSG_ONE			= 1;		// reliable to one (msg_entity)
 float	MSG_ALL			= 2;		// reliable to all
 float	MSG_INIT		= 3;		// write to the init string
+
+// team numbers for Coop
+float TEAM_MONSTERS		= 0;
+float TEAM_HUMANS		= 1;
+
+// mal: basic colors - based on the Quake color palette.
+float COLOR_RED			= 251;
+float COLOR_GREEN		= 184;
+float COLOR_BLUE		= 208;
+float COLOR_YELLOW		= 192;
+float COLOR_WHITE		= 254;
+float COLOR_BLACK		= 0;
+float COLOR_CYAN		= 244;
+float COLOR_ORANGE		= 95;
+
+float DRAW_AI_SINGLE_FRAME		= .1; // mal: use for AI that think every 10th of a second
+float DRAW_GAME_SINGLE_FRAME	= -1; // mal: use in game code that updates every frame.
+
+// player expanded settings flags
+float PEF_CHANGEONLYNEW	= 1;
+float PEF_CHANGENEVER   = 2;
+
+// mal: codes that the QuakeC built-ins "bot_movetopoint" and "bot_followentity" will return each time they're called
+float BOT_GOAL_ERROR 		= 0;	// can't do this goal for some reason.
+float BOT_GOAL_SUCCESS 		= 1;	// goal as requested is complete.
+float BOT_GOAL_IN_PROGRESS 	= 2;	// goal is in progress
+
+// mal: codes that the QuakeC built-in "walkpathtogoal" will return each time it's called
+float PATH_ERROR 			= 0;	// something bad happened ( no nav nodes, no nearby nodes, no path, etc. ).
+float PATH_REACHED_GOAL 	= 1;	// reached whatever we were trying to get to.
+float PATH_REACHED_PATH_END = 2;	// reached the end of the path - can now move directly to target.
+float PATH_MOVE_BLOCKED 	= 3;	// something ( or someone ) is in our way.
+float PATH_IN_PROGRESS 		= 4;	// path was found, and we're following it.
 
 //================================================
 
@@ -449,7 +458,6 @@ float	movedist;
 float	gameover;		// set when a rule exits
 
 string	string_null;	// null string, nothing should be held here
-float	empty_float;
 
 entity	newmis;			// launch_spike sets this after spawning it
 
@@ -458,7 +466,11 @@ entity	activator;		// the entity that activated a trigger or brush
 entity	damage_attacker;	// set by T_Damage
 float	framecount;
 
-float		skill;
+float	skill;
+float	campaign_valid;
+float	campaign;
+
+float	cheats_allowed;		// mal: let's us run cheat commands in DM/Coop games.
 
 //================================================
 
@@ -467,9 +479,11 @@ float		skill;
 //
 .string		wad;
 .string 	map;
-.float		worldtype;	// 0=medieval 1=metal 2=base
 
-.float      alpha;
+float WORLDTYPE_MEDIEVAL = 0;
+float WORLDTYPE_METAL = 1;
+float WORLDTYPE_BASE = 2;
+.float		worldtype;
 
 //================================================
 
@@ -490,7 +504,7 @@ float		skill;
 .void()		th_run;
 .void()		th_missile;
 .void()		th_melee;
-.void(optional entity attacker,optional float damage)		th_pain;
+.void(entity attacker, float damage)		th_pain;
 .void()		th_die;
 
 .entity		oldenemy;		// mad at this player before taking damage
@@ -500,12 +514,22 @@ float		skill;
 .float	lefty;
 
 .float	search_time;
-.float	attack_state;
 
+// Attack state ( not really used in Vanilla )
+.float	attack_state;
 float	AS_STRAIGHT		= 1;
 float	AS_SLIDING		= 2;
 float	AS_MELEE		= 3;
 float	AS_MISSILE		= 4;
+
+.float  allowPathFind; // not used in Vanilla, but added for demonstration purposes...
+
+// Combat style
+.float 	combat_style;
+float   CS_NONE 		= 0; // default - used for bosses or other monsters that don't move
+float 	CS_RANGED		= 1;
+float 	CS_MELEE		= 2;
+float 	CS_MIXED		= 3; // can do ranged or melee equally.
 
 //
 // player only fields
@@ -526,6 +550,8 @@ float	AS_MISSILE		= 4;
 .float		rad_time;
 .float		fly_sound;
 
+.float 		healthrot_nextcheck; // if grabbed Mega-Health, the next time we'll rot the players health
+
 .float		axhitme;
 
 .float		show_hostile;	// set to time+0.2 whenever a client fires a
@@ -536,6 +562,8 @@ float	AS_MISSILE		= 4;
 .float		air_finished;	// when time > air_finished, start drowning
 .float		bubble_count;	// keeps track of the number of bubbles
 .string		deathtype;		// keeps track of how the player died
+.float		fired_weapon;	// [NDS] haleyjd: if player has fired a weapon, for achievement
+.float		took_damage;	// [NDS] haleyjd: if player has taken damage, for achievement
 
 //
 // object stuff
@@ -569,12 +597,12 @@ float	AS_MISSILE		= 4;
 //
 .float		aflag;
 .float		dmg;			// damage done by door when hit
-
+	
 //
 // misc
 //
 .float		cnt; 			// misc flag
-
+	
 //
 // subs
 //
@@ -603,10 +631,14 @@ float	AS_MISSILE		= 4;
 .float		volume;
 
 
+.string		killstring;	// monster kill message
 
+.float    spawn_deferred;
+
+void makevectorsfixed(vector ang);		
 
 //===========================================================================
-
+	
 
 //
 // builtin functions
@@ -633,7 +665,7 @@ void(entity e) remove				= #15;
 // An entity will also be ignored for testing if forent == test,
 // forent->owner == test, or test->owner == forent
 // a forent of world is ignored
-void(vector v1, vector v2, float nomonsters, entity forent) traceline = #16;
+void(vector v1, vector v2, float nomonsters, entity forent) traceline = #16;	
 
 entity() checkclient				= #17;	// returns a client to look for
 entity(entity start, .string fld, string match) find = #18;
@@ -641,9 +673,9 @@ string(string s) precache_sound		= #19;
 string(string s) precache_model		= #20;
 void(entity client, string s)stuffcmd = #21;
 entity(vector org, float rad) findradius = #22;
-void(string s) bprint				= #23;
-void(entity client, string s) sprint = #24;
-void(string s) dprint				= #25;
+void(string s, ...) bprint				= #0:ex_bprint;
+void(entity client, string s, ...) sprint = #0:ex_sprint;
+void(string s, ...) dprint				= #25;
 string(float f) ftos				= #26;
 string(vector v) vtos				= #27;
 void() coredump						= #28;		// prints all edicts
@@ -652,7 +684,7 @@ void() traceoff						= #30;
 void(entity e) eprint				= #31;		// prints an entire edict
 float(float yaw, float dist) walkmove	= #32;	// returns TRUE or FALSE
 // #33 was removed
-float(optional float yaw, optional float dist) droptofloor= #34;	// TRUE if landed on floor
+float() droptofloor= #34;	// TRUE if landed on floor
 void(float style, string value) lightstyle = #35;
 float(float v) rint					= #36;		// round to nearest int
 float(float v) floor				= #37;		// largest integer <= v
@@ -707,7 +739,7 @@ void(string s) changelevel = #70;
 
 void(string var, string val) cvar_set = #72;	// sets cvar.value
 
-void(entity client, string s, optional string s1, optional string s2, optional string s3, optional string s4, optional string s5, optional string s6, optional string s7) centerprint = #73;	// sprint, but in middle
+void(entity client, string s, ...) centerprint = #0:ex_centerprint;	// sprint, but in middle
 
 void(vector pos, string samp, float vol, float atten) ambientsound = #74;
 
@@ -719,23 +751,33 @@ void(entity e) setspawnparms		= #78;		// set parm1... to the
 												// values at level start
 												// for coop respawn
 
-void(entity killer, entity killee) finaleFinished = #79;
-string(entity e, string key) localsound = #80;
-void draw_point( vector point, float colormap, float lifetime, float depthtest ) = #81;
-void draw_line( vector start, vector end, float colormap, float lifetime, float depthtest ) = #82;
-void draw_arrow( vector start, vector end, float colormap, float size, float lifetime, float depthtest ) = #83;
-void draw_ray( vector start, vector direction, float length, float colormap, float size, float lifetime, float depthtest ) = #84;
-void draw_circle( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #85;
-void draw_bounds( vector min, vector max, float colormap, float lifetime, float depthtest ) = #86;
-void draw_worldtext( string s, vector origin, float size, float lifetime, float depthtest ) = #87;
-void draw_sphere( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #88;
-void draw_cylinder( vector origin, float halfHeight, float radius, float colormap, float lifetime, float depthtest ) = #89;
+float() finaleFinished = #0:ex_finaleFinished;
 
-void (entity client, string s, ...) centerprint2 = #90;
-void (string s,...) bprint2 = #91;
-void (entity client, string s, ...) sprint2 = #92;
+// Plays a sound that only "client" can hear. Useful for announcers...
+void localsound( entity client, string sample ) = #0:ex_localsound;
 
-float(string extname) checkextension = #99;
+// Debug rendering functions.
+void draw_point( vector point, float colormap, float lifetime, float depthtest ) = #0:ex_draw_point;
+void draw_line( vector start, vector end, float colormap, float lifetime, float depthtest ) = #0:ex_draw_line;
+void draw_arrow( vector start, vector end, float colormap, float size, float lifetime, float depthtest ) = #0:ex_draw_arrow;
+void draw_ray( vector start, vector direction, float length, float colormap, float size, float lifetime, float depthtest ) = #0:ex_draw_ray;
+void draw_circle( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #0:ex_draw_circle;
+void draw_bounds( vector min, vector max, float colormap, float lifetime, float depthtest ) = #0:ex_draw_bounds;
+void draw_worldtext( string s, vector origin, float size, float lifetime, float depthtest ) = #0:ex_draw_worldtext;
+void draw_sphere( vector origin, float radius, float colormap, float lifetime, float depthtest ) = #0:ex_draw_sphere;
+void draw_cylinder( vector origin, float halfHeight, float radius, float colormap, float lifetime, float depthtest ) = #0:ex_draw_cylinder;
+
+// Bot functions that return a value based on "BOT_GOAL_<X>", depending on the status of the goal.
+float bot_movetopoint( entity bot, vector point ) = #0:ex_bot_movetopoint;
+float bot_followentity( entity bot, entity goal ) = #0:ex_bot_followentity;
+
+// Function for checking new player configured flags, such as weapon swap behaviour
+float CheckPlayerEXFlags( entity playerEnt ) = #0:ex_CheckPlayerEXFlags;
+
+// Path monsters to the goal using any available nav nodes on the map
+float walkpathtogoal( float movedist, vector goal ) = #0:ex_walkpathtogoal;
+
+float checkextension( string s ) = #99;
 
 //============================================================================
 

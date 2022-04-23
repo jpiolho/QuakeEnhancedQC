@@ -1,13 +1,29 @@
+/*  Copyright (C) 1996-2022 id Software LLC
 
-void() InitBodyQue;
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+    See file, 'COPYING', for details.
+*/
+
+void() InitBodyQueue;
 
 
 void() main =
 {
-	local float ignore = empty_float; // To absorb unused empty_float warning
-
 	dprint ("main function\n");
-
+	
 // these are just commands the the prog compiler to copy these files
 
 	precache_file ("progs.dat");
@@ -54,35 +70,35 @@ void() main =
 	precache_file ("gfx/dim_tcp.lmp");
 	precache_file ("gfx/dim_mult.lmp");
 	precache_file ("gfx/mainmenu.lmp");
-
+	
 	precache_file ("gfx/box_tl.lmp");
 	precache_file ("gfx/box_tm.lmp");
 	precache_file ("gfx/box_tr.lmp");
-
+	
 	precache_file ("gfx/box_ml.lmp");
 	precache_file ("gfx/box_mm.lmp");
 	precache_file ("gfx/box_mm2.lmp");
 	precache_file ("gfx/box_mr.lmp");
-
+	
 	precache_file ("gfx/box_bl.lmp");
 	precache_file ("gfx/box_bm.lmp");
 	precache_file ("gfx/box_br.lmp");
-
+	
 	precache_file ("gfx/sp_menu.lmp");
 	precache_file ("gfx/ttl_sgl.lmp");
 	precache_file ("gfx/ttl_main.lmp");
 	precache_file ("gfx/ttl_cstm.lmp");
-
+	
 	precache_file ("gfx/mp_menu.lmp");
-
+	
 	precache_file ("gfx/netmen1.lmp");
 	precache_file ("gfx/netmen2.lmp");
 	precache_file ("gfx/netmen3.lmp");
 	precache_file ("gfx/netmen4.lmp");
 	precache_file ("gfx/netmen5.lmp");
-
+	
 	precache_file ("gfx/sell.lmp");
-
+	
 	precache_file ("gfx/help0.lmp");
 	precache_file ("gfx/help1.lmp");
 	precache_file ("gfx/help2.lmp");
@@ -171,31 +187,30 @@ World Types:
 2: base
 */
 //=======================
+float startingserverflags;
+ 
 void() worldspawn =
 {
+	startingserverflags = serverflags;
 	lastspawn = world;
-	InitBodyQue ();
+	InitBodyQueue ();
 
-// custom map attributes
+	// custom map attributes
 	if (self.model == "maps/e1m8.bsp")
 		cvar_set ("sv_gravity", "100");
 	else
 		cvar_set ("sv_gravity", "800");
 
+	// the area based ambient sounds MUST be the first precache_sounds
 
-// custom map title
-	self.message = GetMapName(self.message);
-
-// the area based ambient sounds MUST be the first precache_sounds
-
-// player precaches
+	// player precaches	
 	W_Precache ();			// get weapon precaches
 
-// sounds used from C physics code
+	// sounds used from C physics code
 	precache_sound ("demon/dland2.wav");		// landing thud
 	precache_sound ("misc/h2ohit1.wav");		// landing splash
 
-// setup precaches allways needed
+	// setup precaches allways needed
 	precache_sound ("items/itembk2.wav");		// item respawn sound
 	precache_sound ("player/plyrjmp8.wav");		// player jump
 	precache_sound ("player/land.wav");			// player landing
@@ -243,7 +258,7 @@ void() worldspawn =
 	precache_sound ("player/death4.wav");
 	precache_sound ("player/death5.wav");
 
-// ax sounds
+// ax sounds	
 	precache_sound ("weapons/ax1.wav");			// ax swoosh
 	precache_sound ("player/axhit1.wav");		// ax hit meat
 	precache_sound ("player/axhit2.wav");		// ax hit world
@@ -282,7 +297,7 @@ void() worldspawn =
 	precache_model ("progs/bolt2.mdl");		// for lightning gun
 	precache_model ("progs/bolt3.mdl");		// for boss shock
 	precache_model ("progs/lavaball.mdl");	// for testing
-
+	
 	precache_model ("progs/missile.mdl");
 	precache_model ("progs/grenade.mdl");
 	precache_model ("progs/spike.mdl");
@@ -293,7 +308,7 @@ void() worldspawn =
 	precache_model ("progs/zom_gib.mdl");
 
 	precache_model ("progs/v_light.mdl");
-
+	
 
 //
 // Setup light animation tables. 'a' is total darkness, 'z' is maxbright.
@@ -301,50 +316,59 @@ void() worldspawn =
 
 	// 0 normal
 	lightstyle(0, "m");
-
+	
 	// 1 FLICKER (first variety)
 	lightstyle(1, "mmnmmommommnonmmonqnmmo");
-
+	
 	// 2 SLOW STRONG PULSE
 	lightstyle(2, "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba");
-
+	
 	// 3 CANDLE (first variety)
 	lightstyle(3, "mmmmmaaaaammmmmaaaaaabcdefgabcdefg");
-
+	
 	// 4 FAST STROBE
 	lightstyle(4, "mamamamamama");
-
+	
 	// 5 GENTLE PULSE 1
 	lightstyle(5,"jklmnopqrstuvwxyzyxwvutsrqponmlkj");
-
+	
 	// 6 FLICKER (second variety)
 	lightstyle(6, "nmonqnmomnmomomno");
-
+	
 	// 7 CANDLE (second variety)
 	lightstyle(7, "mmmaaaabcdefgmmmmaaaammmaamm");
-
+	
 	// 8 CANDLE (third variety)
 	lightstyle(8, "mmmaaammmaaammmabcdefaaaammmmabcdefmmmaaaa");
-
+	
 	// 9 SLOW STROBE (fourth variety)
 	lightstyle(9, "aaaaaaaazzzzzzzz");
-
+	
 	// 10 FLUORESCENT FLICKER
 	lightstyle(10, "mmamammmmammamamaaamammma");
 
 	// 11 SLOW PULSE NOT FADE TO BLACK
 	lightstyle(11, "abcdefghijklmnopqrrqponmlkjihgfedcba");
-
+	
 	// styles 32-62 are assigned by the light program for switchable lights
 
 	// 63 testing
 	lightstyle(63, "a");
 };
 
-void() StartFrame =
-{
+void StartFrame() {
 	teamplay = cvar("teamplay");
 	skill = cvar("skill");
+	cheats_allowed = cvar("sv_cheats");
+
+    // save off a global here so it gets included in savegames
+    if (!campaign_valid) {
+        campaign_valid = TRUE;
+        campaign = cvar("campaign");
+    } else {
+        cvar_set("campaign", ftos(campaign));
+    }
+
 	framecount = framecount + 1;
 };
 
@@ -356,43 +380,42 @@ BODY QUE
 ==============================================================================
 */
 
-entity	bodyque_head;
+entity	bodyqueue_head;
 
-void() bodyque =
+void() bodyqueue =
 {	// just here so spawn functions don't complain after the world
-	// creates bodyques
+	// creates bodyqueues
 };
 
-void() InitBodyQue =
-{
-
-	bodyque_head = spawn();
-	bodyque_head.classname = "bodyque";
-	bodyque_head.owner = spawn();
-	bodyque_head.owner.classname = "bodyque";
-	bodyque_head.owner.owner = spawn();
-	bodyque_head.owner.owner.classname = "bodyque";
-	bodyque_head.owner.owner.owner = spawn();
-	bodyque_head.owner.owner.owner.classname = "bodyque";
-	bodyque_head.owner.owner.owner.owner = bodyque_head;
+void() InitBodyQueue =
+{	
+	bodyqueue_head = spawn();
+	bodyqueue_head.classname = "bodyqueue";
+	bodyqueue_head.owner = spawn();
+	bodyqueue_head.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner = spawn();
+	bodyqueue_head.owner.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner.owner = spawn();
+	bodyqueue_head.owner.owner.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner.owner.owner = bodyqueue_head;
 };
 
 
 // make a body que entry for the given ent so the ent can be
 // respawned elsewhere
-void(entity ent) CopyToBodyQue =
+void(entity ent) CopyToBodyQueue =
 {
-	bodyque_head.angles = ent.angles;
-	bodyque_head.model = ent.model;
-	bodyque_head.modelindex = ent.modelindex;
-	bodyque_head.frame = ent.frame;
-	bodyque_head.colormap = ent.colormap;
-	bodyque_head.movetype = ent.movetype;
-	bodyque_head.velocity = ent.velocity;
-	bodyque_head.flags = 0;
-	setorigin (bodyque_head, ent.origin);
-	setsize (bodyque_head, ent.mins, ent.maxs);
-	bodyque_head = bodyque_head.owner;
+	bodyqueue_head.angles = ent.angles;
+	bodyqueue_head.model = ent.model;
+	bodyqueue_head.modelindex = ent.modelindex;
+	bodyqueue_head.frame = ent.frame;
+	bodyqueue_head.colormap = ent.colormap;
+	bodyqueue_head.movetype = ent.movetype;
+	bodyqueue_head.velocity = ent.velocity;
+	bodyqueue_head.flags = 0;
+	setorigin (bodyqueue_head, ent.origin);
+	setsize (bodyqueue_head, ent.mins, ent.maxs);
+	bodyqueue_head = bodyqueue_head.owner;
 };
 
 

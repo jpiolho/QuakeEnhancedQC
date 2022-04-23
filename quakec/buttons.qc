@@ -1,3 +1,22 @@
+/*  Copyright (C) 1996-2022 id Software LLC
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+    See file, 'COPYING', for details.
+*/
+
 // button and multiple button
 
 void() button_wait;
@@ -23,6 +42,7 @@ void() button_return =
 	self.state = STATE_DOWN;
 	SUB_CalcMove (self.pos1, self.speed, button_done);
 	self.frame = 0;			// use normal textures
+
 	if (self.health)
 		self.takedamage = DAMAGE_YES;	// can be shot again
 };
@@ -55,6 +75,7 @@ void() button_touch =
 {
 	if (other.classname != "player")
 		return;
+
 	self.enemy = other;
 	button_fire ();
 };
@@ -85,32 +106,33 @@ When a button is touched, it moves some distance in the direction of it's angle,
 */
 void() func_button =
 {
-
 	if (self.sounds == 0)
 	{
 		precache_sound ("buttons/airbut1.wav");
 		self.noise = "buttons/airbut1.wav";
 	}
+
 	if (self.sounds == 1)
 	{
 		precache_sound ("buttons/switch21.wav");
 		self.noise = "buttons/switch21.wav";
 	}
+
 	if (self.sounds == 2)
 	{
 		precache_sound ("buttons/switch02.wav");
 		self.noise = "buttons/switch02.wav";
 	}
+
 	if (self.sounds == 3)
 	{
 		precache_sound ("buttons/switch04.wav");
 		self.noise = "buttons/switch04.wav";
 	}
-
+	
 	SetMovedir ();
 
-	self.classname = "func_button"; // Better bot support
-
+	self.classname = "func_button"; 
 	self.movetype = MOVETYPE_PUSH;
 	self.solid = SOLID_BSP;
 	setmodel (self, self.model);
@@ -129,14 +151,17 @@ void() func_button =
 
 	if (!self.speed)
 		self.speed = 40;
+
 	if (!self.wait)
 		self.wait = 1;
+
 	if (!self.lip)
 		self.lip = 4;
 
 	self.state = STATE_BOTTOM;
 
 	self.pos1 = self.origin;
-	self.pos2 = self.pos1 + self.movedir*(fabs(self.movedir*self.size) - self.lip);
+	vector movedir_fabs = { fabs(self.movedir[0]), fabs(self.movedir[1]), fabs(self.movedir[2]) };
+	self.pos2 = self.pos1 + ((movedir_fabs * self.size) - self.lip) * self.movedir;
 };
 
