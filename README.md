@@ -1,11 +1,19 @@
-# Quake Rerelease QuakeC Source Code
+# QuakeEnhancedQC
+A QuakeC base intended to be used for modding Quake Enhanced specifically.
 
-This repository contains the QuakeC source code for the four codebases that were used in the 2021 re-release of Quake: the base campaign, Scourge of Armagon, Dissolution of Eternity, and Dimension of the Machine. Dimension of the Past shares the same codebase as Dimension of the Machine.
+This repo originally started in order to make a QuakeC base that was compatible with Quake Enhanced as well as replicating all the new changes.
+Since then the [official QC has been released](https://github.com/id-Software/quake-rerelease-qc).
+Both repositories have now been merged and this repo will continue with improvements and utilities on top of the official release.
 
-In comparison with the original QuakeC, these codebases have been updated to replace all instances of strings with placeholder strings that can be used for localization. This requires some support on the engine side in order to handle printing messages correctly. There have also been bug fixes and modifications to behaviors from the original game.
+* Meant to be used with [FTEQCC](https://www.fteqcc.org) compiler
+* All warnings have been fixed
+* Some utilities related to Quake Enhanced have been added
+* This code is released under the GPLv2 license. See `COPYING.txt` for more details.
 
-These progs also use some advanced QuakeC features that are only available in modern compilers. We recommend using [FTEQCC](https://www.fteqcc.org) for compiling this release.
+## New Features / Utilities
 
-This code is released under the GPLv2 license. See `COPYING.txt` for more details.
+### Multiplayer mod name
+Quake Enhanced doesn't officially support multiplayer mods, but unofficially it's possible to develop them. However, right now, the only way to show that a lobby is running a mod it's to change the map name.
+For this effect, the base contains a file: `maps.qc` which contains code that will automatically append the mod name to any of the official maps.
 
-id Software is unable to provide support for this release, however we urge you to take advantage of the depth of community-driven resources already available.
+If you have any custom map and you want the mod name to apply, you need to register it with this file.
