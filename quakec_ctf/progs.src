@@ -1,0 +1,24 @@
+../qsrc/ctf/progs.dat
+
+defs.qc
+log.qc			// Console logging of game actions
+teamplay.qc     // Compile the teamplay file
+ctfgame.qc		// vote exit stuff
+status.qc		// team status stuff
+subs.qc
+combat.qc
+itemnames.qc
+items.qc
+observ.qc
+weapons.qc
+world.qc
+client.qc
+player.qc
+doors.qc
+buttons.qc
+triggers.qc
+plats.qc
+misc.qc
+hook.qc
+server.qc
+bots/bot.qc

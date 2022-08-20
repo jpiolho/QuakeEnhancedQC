@@ -68,6 +68,7 @@ monsters/oldone.qc		// registered
 
 misc_corpses.qc //Corpses yay
 misc_fx.qc // adds screenshake
+misc_model.qc //generic static and animated model
 
 //Map specific code? Why not..
 map_specific/mge2m2.qc

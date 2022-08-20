@@ -133,6 +133,10 @@ void() OgreFireGrenade =
 	missile.velocity_z = 200;
 	missile.avelocity = '300 300 300';
 	missile.angles = vectoangles(missile.velocity);
+
+	if (cvar("pr_checkextension"))
+		if (checkextension("EX_EXTENDED_EF"))
+			missile.effects = missile.effects | EF_CANDLELIGHT; // give the projectiles a weak glow
 	
 // set missile duration
 	if(self.spawnflags & OGRE_BOSS)
