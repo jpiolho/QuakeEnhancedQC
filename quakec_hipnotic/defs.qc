@@ -479,6 +479,8 @@ float	cheats_allowed;		// mal: let's us run cheat commands in DM/Coop games.
 
 //================================================
 
+.float      alpha;
+
 .string		killtarget;
 
 //

@@ -496,6 +496,8 @@ float WORLDTYPE_BASE = 2;
 
 //================================================
 
+.float    alpha;
+
 .string   killtarget;
 
 //

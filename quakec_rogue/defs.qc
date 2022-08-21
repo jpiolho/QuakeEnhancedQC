@@ -513,6 +513,8 @@ entity  tag_token_owner;
 
 //================================================
 
+.float		alpha;
+
 .string		killtarget;
 
 //
