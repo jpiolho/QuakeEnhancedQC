@@ -830,6 +830,13 @@ float walkpathtogoal( float movedist, vector goal ) = #0:ex_walkpathtogoal;
 
 float checkextension( string s ) = #99;
 
+void setcolor( entity client, float color ) = #401;
+
+void prompt( entity client, string text, float numChoices ) = #0:ex_prompt;
+void promptchoice( entity client, string text, float impulse ) = #0:ex_promptchoice;
+void clearprompt( entity client ) = #0:ex_clearprompt;
+
+
 //============================================================================
 
 //
