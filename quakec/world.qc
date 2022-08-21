@@ -203,6 +203,9 @@ void() worldspawn =
 
 	// the area based ambient sounds MUST be the first precache_sounds
 
+	// custom map title
+	self.message = GetMapName(self.message);
+
 	// player precaches	
 	W_Precache ();			// get weapon precaches
 
